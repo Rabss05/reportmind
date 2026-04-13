@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReportMind — AI Report Writer for Students</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131a;
+    --surface2: #1c1c28;
+    --border: #2a2a3d;
+    --accent: #6c63ff;
+    --accent2: #00d4aa;
+    --accent3: #ff6b6b;
+    --text: #f0f0f8;
+    --text-muted: #8888aa;
+    --text-dim: #4a4a6a;
+    --glow: rgba(108, 99, 255, 0.15);
+    --glow2: rgba(0, 212, 170, 0.1);
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: ‘Satoshi’, sans-serif;
+background: var(–bg);
+color: var(–text);
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Background orbs */
+.bg-orbs {
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 0;
+overflow: hidden;
+}
+.orb {
+position: absolute;
+border-radius: 50%;
+filter: blur(80px);
+opacity: 0.35;
+animation: float 8s ease-in-out infinite;
+}
+.orb1 { width: 500px; height: 500px; background: var(–accent); top: -200px; left: -100px; animation-delay: 0s; }
+.orb2 { width: 400px; height: 400px; background: var(–accent2); bottom: -150px; right: -100px; animation-delay: 3s; }
+.orb3 { width: 300px; height: 300px; background: #ff6bbb; top: 50%; left: 50%; animation-delay: 6s; }
+
+@keyframes float {
+0%, 100% { transform: translate(0, 0) scale(1); }
+50% { transform: translate(20px, -20px) scale(1.05); }
+}
+
+/* NAV */
+nav {
+position: relative;
+z-index: 10;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 24px 48px;
+border-bottom: 1px solid var(–border);
+background: rgba(10,10,15,0.8);
+backdrop-filter: blur(20px);
+}
+
+.logo {
+font-family: ‘Clash Display’, sans-serif;
+font-size: 1.6rem;
+font-weight: 700;
+background: linear-gradient(135deg, var(–accent), var(–accent2));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+letter-spacing: -0.5px;
+}
+
+.logo span {
+font-weight: 400;
+opacity: 0.7;
+}
+
+.nav-badge {
+background: linear-gradient(135deg, var(–accent), var(–accent2));
+color: white;
+font-size: 0.7rem;
+font-weight: 700;
+padding: 4px 10px;
+border-radius: 20px;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+
+/* HERO */
+.hero {
+position: relative;
+z-index: 5;
+text-align: center;
+padding: 80px 48px 60px;
+max-width: 800px;
+margin: 0 auto;
+}
+
+.hero-tag {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 50px;
+padding: 6px 16px;
+font-size: 0.8rem;
+color: var(–accent2);
+font-weight: 500;
+margin-bottom: 28px;
+letter-spacing: 0.5px;
+}
+
+.hero-tag::before {
+content: ‘’;
+width: 6px;
+height: 6px;
+background: var(–accent2);
+border-radius: 50%;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+h1 {
+font-family: ‘Clash Display’, sans-serif;
+font-size: clamp(2.5rem, 5vw, 4rem);
+font-weight: 700;
+line-height: 1.1;
+letter-spacing: -2px;
+margin-bottom: 20px;
+}
+
+h1 .highlight {
+background: linear-gradient(135deg, var(–accent), var(–accent2));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.hero p {
+font-size: 1.1rem;
+color: var(–text-muted);
+line-height: 1.7;
+max-width: 560px;
+margin: 0 auto;
+font-weight: 300;
+}
+
+/* MAIN APP */
+.app-container {
+position: relative;
+z-index: 5;
+max-width: 900px;
+margin: 0 auto;
+padding: 0 24px 80px;
+}
+
+.app-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 24px;
+overflow: hidden;
+box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(108,99,255,0.1);
+}
+
+.app-header {
+background: var(–surface2);
+padding: 20px 28px;
+border-bottom: 1px solid var(–border);
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot.red { background: #ff5f57; }
+.dot.yellow { background: #febc2e; }
+.dot.green { background: #28c840; }
+
+.app-title {
+margin-left: 8px;
+font-size: 0.85rem;
+color: var(–text-muted);
+font-weight: 500;
+}
+
+.app-body {
+padding: 32px;
+display: grid;
+gap: 24px;
+}
+
+/* FORM ELEMENTS */
+.form-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 16px;
+}
+
+.form-group {
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+label {
+font-size: 0.8rem;
+font-weight: 600;
+color: var(–text-muted);
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+select, input, textarea {
+background: var(–bg);
+border: 1px solid var(–border);
+border-radius: 12px;
+color: var(–text);
+font-family: ‘Satoshi’, sans-serif;
+font-size: 0.95rem;
+padding: 14px 16px;
+outline: none;
+transition: all 0.2s;
+width: 100%;
+}
+
+select:focus, input:focus, textarea:focus {
+border-color: var(–accent);
+box-shadow: 0 0 0 3px var(–glow);
+}
+
+select option { background: var(–surface2); }
+
+textarea {
+resize: vertical;
+min-height: 140px;
+line-height: 1.6;
+}
+
+.char-count {
+font-size: 0.75rem;
+color: var(–text-dim);
+text-align: right;
+}
+
+/* TONE SELECTOR */
+.tone-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 10px;
+}
+
+.tone-btn {
+background: var(–bg);
+border: 1px solid var(–border);
+border-radius: 10px;
+padding: 10px 12px;
+color: var(–text-muted);
+font-family: ‘Satoshi’, sans-serif;
+font-size: 0.82rem;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s;
+text-align: center;
+}
+
+.tone-btn:hover {
+border-color: var(–accent);
+color: var(–text);
+}
+
+.tone-btn.active {
+background: var(–glow);
+border-color: var(–accent);
+color: var(–accent);
+}
+
+/* GENERATE BUTTON */
+.generate-btn {
+width: 100%;
+padding: 18px;
+background: linear-gradient(135deg, var(–accent), #8b5cf6);
+border: none;
+border-radius: 14px;
+color: white;
+font-family: ‘Clash Display’, sans-serif;
+font-size: 1.1rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s;
+letter-spacing: 0.5px;
+position: relative;
+overflow: hidden;
+}
+
+.generate-btn::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background: linear-gradient(135deg, #8b5cf6, var(–accent2));
+opacity: 0;
+transition: opacity 0.3s;
+}
+
+.generate-btn:hover::before { opacity: 1; }
+.generate-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(108,99,255,0.4); }
+.generate-btn:active { transform: translateY(0); }
+.generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.generate-btn span { position: relative; z-index: 1; }
+
+/* DIVIDER */
+.divider {
+display: flex;
+align-items: center;
+gap: 16px;
+color: var(–text-dim);
+font-size: 0.8rem;
+}
+.divider::before, .divider::after {
+content: ‘’;
+flex: 1;
+height: 1px;
+background: var(–border);
+}
+
+/* OUTPUT */
+.output-section {
+display: none;
+}
+
+.output-section.visible {
+display: block;
+animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.output-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 16px;
+}
+
+.output-label {
+font-size: 0.8rem;
+font-weight: 600;
+color: var(–accent2);
+text-transform: uppercase;
+letter-spacing: 1px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.output-label::before {
+content: ‘’;
+width: 6px;
+height: 6px;
+background: var(–accent2);
+border-radius: 50%;
+}
+
+.output-actions {
+display: flex;
+gap: 8px;
+}
+
+.action-btn {
+background: var(–surface2);
+border: 1px solid var(–border);
+border-radius: 8px;
+color: var(–text-muted);
+font-family: ‘Satoshi’, sans-serif;
+font-size: 0.8rem;
+padding: 8px 14px;
+cursor: pointer;
+transition: all 0.2s;
+font-weight: 500;
+}
+
+.action-btn:hover {
+border-color: var(–accent);
+color: var(–accent);
+}
+
+.output-box {
+background: var(–bg);
+border: 1px solid var(–border);
+border-radius: 14px;
+padding: 24px;
+font-size: 0.9rem;
+line-height: 1.8;
+color: var(–text);
+min-height: 200px;
+white-space: pre-wrap;
+font-family: ‘Satoshi’, sans-serif;
+}
+
+/* LOADING */
+.loading-state {
+display: none;
+text-align: center;
+padding: 40px;
+color: var(–text-muted);
+}
+
+.loading-state.visible { display: block; }
+
+.loader {
+width: 40px;
+height: 40px;
+border: 3px solid var(–border);
+border-top-color: var(–accent);
+border-radius: 50%;
+animation: spin 0.8s linear infinite;
+margin: 0 auto 16px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-steps {
+display: flex;
+flex-direction: column;
+gap: 6px;
+margin-top: 12px;
+}
+
+.loading-step {
+font-size: 0.8rem;
+color: var(–text-dim);
+opacity: 0;
+animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* STATS BAR */
+.stats-bar {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1px;
+background: var(–border);
+border: 1px solid var(–border);
+border-radius: 16px;
+overflow: hidden;
+margin-bottom: 32px;
+}
+
+.stat {
+background: var(–surface);
+padding: 20px;
+text-align: center;
+}
+
+.stat-number {
+font-family: ‘Clash Display’, sans-serif;
+font-size: 1.8rem;
+font-weight: 700;
+background: linear-gradient(135deg, var(–accent), var(–accent2));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+font-size: 0.75rem;
+color: var(–text-muted);
+margin-top: 4px;
+}
+
+/* FOOTER */
+footer {
+position: relative;
+z-index: 5;
+text-align: center;
+padding: 32px;
+border-top: 1px solid var(–border);
+color: var(–text-dim);
+font-size: 0.8rem;
+}
+
+footer span {
+background: linear-gradient(135deg, var(–accent), var(–accent2));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+font-weight: 600;
+}
+
+/* ERROR */
+.error-msg {
+background: rgba(255,107,107,0.1);
+border: 1px solid rgba(255,107,107,0.3);
+border-radius: 10px;
+padding: 12px 16px;
+color: #ff6b6b;
+font-size: 0.85rem;
+display: none;
+}
+.error-msg.visible { display: block; }
+
+@media (max-width: 640px) {
+nav { padding: 16px 20px; }
+.hero { padding: 48px 20px 40px; }
+.app-body { padding: 20px; }
+.form-row { grid-template-columns: 1fr; }
+.tone-grid { grid-template-columns: repeat(2, 1fr); }
+.stats-bar { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<nav>
+  <div class="logo">ReportMind</div>
+  <div class="nav-badge">✦ AI Powered</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Built for every student, every subject</div>
+  <h1>Your AI Report<br><span class="highlight">Writer & Generator</span></h1>
+  <p>Paste your notes, data, or bullet points. ReportMind turns them into a complete, professional academic report in seconds.</p>
+</div>
+
+<div class="app-container">
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-number">30s</div>
+      <div class="stat-label">Average generation time</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">12+</div>
+      <div class="stat-label">Academic fields supported</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Structured & formatted</div>
+    </div>
+  </div>
+
+  <div class="app-card">
+    <div class="app-header">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <div class="app-title">ReportMind — Report Generator</div>
+    </div>
+
+```
+<div class="app-body">
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Academic Field</label>
+      <select id="field">
+        <option value="mechanical engineering">⚙️ Mechanical Engineering</option>
+        <option value="electrical engineering">⚡ Electrical Engineering</option>
+        <option value="civil engineering">🏗️ Civil Engineering</option>
+        <option value="computer science">💻 Computer Science</option>
+        <option value="chemistry">🧪 Chemistry</option>
+        <option value="biology">🧬 Biology</option>
+        <option value="physics">🔬 Physics</option>
+        <option value="medicine">🩺 Medicine</option>
+        <option value="law">⚖️ Law</option>
+        <option value="business">📊 Business</option>
+        <option value="environmental science">🌱 Environmental Science</option>
+        <option value="mathematics">📐 Mathematics</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Report Type</label>
+      <select id="reportType">
+        <option value="lab report">Lab Report</option>
+        <option value="research report">Research Report</option>
+        <option value="case study">Case Study</option>
+        <option value="project report">Project Report</option>
+        <option value="technical report">Technical Report</option>
+        <option value="literature review">Literature Review</option>
+        <option value="field report">Field Report</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Report Title / Topic</label>
+    <input type="text" id="title" placeholder="e.g. Analysis of Beam Deflection Under Load" />
+  </div>
+
+  <div class="form-group">
+    <label>Your Notes, Data & Key Points</label>
+    <textarea id="notes" placeholder="Paste your raw notes, experiment data, bullet points, observations, results — anything you have. The more detail you give, the better your report will be.&#10;&#10;Example:&#10;- Tested 3 beam samples under 50N, 100N, 150N loads&#10;- Results: deflection increased linearly&#10;- Used steel beams 500mm length&#10;- Compared to theoretical Euler-Bernoulli predictions"></textarea>
+    <div class="char-count" id="charCount">0 characters</div>
+  </div>
+
+  <div class="form-group">
+    <label>Writing Tone</label>
+    <div class="tone-grid">
+      <button class="tone-btn active" onclick="selectTone(this, 'formal academic')">🎓 Formal Academic</button>
+      <button class="tone-btn" onclick="selectTone(this, 'technical and precise')">🔧 Technical</button>
+      <button class="tone-btn" onclick="selectTone(this, 'clear and concise')">✨ Clear & Concise</button>
+      <button class="tone-btn" onclick="selectTone(this, 'analytical and critical')">🧠 Analytical</button>
+      <button class="tone-btn" onclick="selectTone(this, 'descriptive and detailed')">📝 Detailed</button>
+      <button class="tone-btn" onclick="selectTone(this, 'professional')">💼 Professional</button>
+    </div>
+  </div>
+
+  <div class="error-msg" id="errorMsg"></div>
+
+  <button class="generate-btn" id="generateBtn" onclick="generateReport()">
+    <span>✦ Generate My Report</span>
+  </button>
+
+  <div class="loading-state" id="loadingState">
+    <div class="loader"></div>
+    <div style="font-weight:500; color: var(--text)">ReportMind is writing your report...</div>
+    <div class="loading-steps">
+      <div class="loading-step" style="animation-delay:0.5s">📋 Analyzing your notes and data...</div>
+      <div class="loading-step" style="animation-delay:1.5s">🧠 Structuring sections and arguments...</div>
+      <div class="loading-step" style="animation-delay:2.5s">✍️ Writing introduction, methodology & results...</div>
+      <div class="loading-step" style="animation-delay:3.5s">📊 Finalizing conclusions & formatting...</div>
+    </div>
+  </div>
+
+  <div class="output-section" id="outputSection">
+    <div class="divider">Report Ready</div>
+    <br>
+    <div class="output-header">
+      <div class="output-label">Generated Report</div>
+      <div class="output-actions">
+        <button class="action-btn" onclick="copyReport()">📋 Copy</button>
+        <button class="action-btn" onclick="downloadReport()">⬇️ Download</button>
+        <button class="action-btn" onclick="resetForm()">↩️ New Report</button>
+      </div>
+    </div>
+    <div class="output-box" id="outputBox"></div>
+  </div>
+
+</div>
+```
+
+  </div>
+</div>
+
+<footer>
+  Made with ✦ by <span>ReportMind</span> — The AI Report Writer for Every Student
+</footer>
+
+<script>
+  let selectedTone = 'formal academic';
+
+  function selectTone(btn, tone) {
+    document.querySelectorAll('.tone-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedTone = tone;
+  }
+
+  document.getElementById('notes').addEventListener('input', function() {
+    document.getElementById('charCount').textContent = this.value.length + ' characters';
+  });
+
+  function showError(msg) {
+    const el = document.getElementById('errorMsg');
+    el.textContent = msg;
+    el.classList.add('visible');
+    setTimeout(() => el.classList.remove('visible'), 5000);
+  }
+
+  async function generateReport() {
+    const field = document.getElementById('field').value;
+    const reportType = document.getElementById('reportType').value;
+    const title = document.getElementById('title').value.trim();
+    const notes = document.getElementById('notes').value.trim();
+
+    if (!title) return showError('Please enter a report title or topic.');
+    if (!notes || notes.length < 20) return showError('Please add more detail to your notes — the more you give, the better the report.');
+
+    const btn = document.getElementById('generateBtn');
+    const loading = document.getElementById('loadingState');
+    const outputSection = document.getElementById('outputSection');
+
+    btn.disabled = true;
+    btn.querySelector('span').textContent = 'Generating...';
+    loading.classList.add('visible');
+    outputSection.classList.remove('visible');
+
+    const prompt = `You are an expert academic report writer. Write a complete, well-structured, professional ${reportType} for a ${field} student.
+
+REPORT TITLE: ${title}
+
+STUDENT'S NOTES AND DATA:
+${notes}
+
+WRITING TONE: ${selectedTone}
+
+Write a FULL, COMPLETE ${reportType} with ALL of the following sections (use clear section headers):
+
+1. TITLE PAGE INFO (title, field, date)
+2. ABSTRACT (150-200 words summarizing the whole report)
+3. INTRODUCTION (background, context, objectives, purpose)
+4. METHODOLOGY / MATERIALS & METHODS (how the work was done, what was used)
+5. RESULTS & FINDINGS (present the data and findings clearly)
+6. DISCUSSION (interpret the results, what they mean, compare to theory/literature if relevant)
+7. CONCLUSION (summarize findings, what was learned, limitations, future work)
+8. REFERENCES (list 4-6 realistic academic references in proper format)
+
+Rules:
+- Write in ${selectedTone} tone throughout
+- Use proper academic language appropriate for ${field}
+- Make it sound like a real student wrote this with genuine understanding
+- Be thorough and detailed — this should be a complete report a student can submit
+- Use the student's notes as the core content, expanding on them professionally
+- Format clearly with section headers in ALL CAPS`;
+
+    try {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.content && data.content[0] && data.content[0].text) {
+        document.getElementById('outputBox').textContent = data.content[0].text;
+        outputSection.classList.add('visible');
+      } else {
+        showError('Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      showError('Connection error. Please check your internet and try again.');
+    } finally {
+      btn.disabled = false;
+      btn.querySelector('span').textContent = '✦ Generate My Report';
+      loading.classList.remove('visible');
+    }
+  }
+
+  function copyReport() {
+    const text = document.getElementById('outputBox').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = event.target;
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => btn.textContent = '📋 Copy', 2000);
+    });
+  }
+
+  function downloadReport() {
+    const text = document.getElementById('outputBox').textContent;
+    const title = document.getElementById('title').value || 'report';
+    const blob = new Blob([text], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `ReportMind_${title.replace(/\s+/g,'_')}.txt`;
+    a.click();
+  }
+
+  function resetForm() {
+    document.getElementById('title').value = '';
+    document.getElementById('notes').value = '';
+    document.getElementById('charCount').textContent = '0 characters';
+    document.getElementById('outputSection').classList.remove('visible');
+    document.querySelectorAll('.tone-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.tone-btn').classList.add('active');
+    selectedTone = 'formal academic';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
