@@ -6,15 +6,15 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    let body = req.body;
-    
-    // Parse body if it's a string
-    if (typeof body === 'string') {
-      body = JSON.parse(body);
+    // Manually read and parse the body
+    const buffers = [];
+    for await (const chunk of req) {
+      buffers.push(chunk);
     }
-    
-    const prompt = body && body.prompt;
-    if (!prompt) return res.status(400).json({ error: 'No prompt provided' });
+    const rawBody = Buffer.concat(buffers).toString();
+    const { prompt } = JSON.parse(rawBody);
+
+    if (!prompt) return res.status(400).json({ error: 'No prompt' });
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -35,5 +35,11 @@ module.exports = async function handler(req, res) {
 
   } catch (err) {
     return res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports.config = {
+  api: {
+    bodyParser: false
   }
 };
