@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -22,435 +21,391 @@
     --glow: rgba(124,109,250,0.18);
   }
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-font-family: ‘DM Sans’, sans-serif;
-background: var(–bg);
-color: var(–text);
-min-height: 100vh;
-overflow-x: hidden;
-}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-/* BACKGROUND */
-.bg-orbs {
-position: fixed;
-inset: 0;
-pointer-events: none;
-z-index: 0;
-overflow: hidden;
-}
-.orb {
-position: absolute;
-border-radius: 50%;
-filter: blur(90px);
-opacity: 0.3;
-animation: float 10s ease-in-out infinite;
-}
-.orb1 { width: 600px; height: 600px; background: #7c6dfa; top: -250px; left: -150px; animation-delay: 0s; }
-.orb2 { width: 450px; height: 450px; background: #00e5b0; bottom: -180px; right: -120px; animation-delay: 4s; }
-.orb3 { width: 350px; height: 350px; background: #fa6dbb; top: 40%; left: 40%; animation-delay: 7s; }
+  .bg-orbs {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.3;
+    animation: float 10s ease-in-out infinite;
+  }
+  .orb1 { width: 600px; height: 600px; background: #7c6dfa; top: -250px; left: -150px; animation-delay: 0s; }
+  .orb2 { width: 450px; height: 450px; background: #00e5b0; bottom: -180px; right: -120px; animation-delay: 4s; }
+  .orb3 { width: 350px; height: 350px; background: #fa6dbb; top: 40%; left: 40%; animation-delay: 7s; }
 
-@keyframes float {
-0%, 100% { transform: translate(0,0) scale(1); }
-50% { transform: translate(25px,-25px) scale(1.06); }
-}
+  @keyframes float {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(25px,-25px) scale(1.06); }
+  }
 
-/* NAV */
-nav {
-position: relative;
-z-index: 10;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 22px 48px;
-border-bottom: 1px solid var(–border);
-background: rgba(8,8,16,0.85);
-backdrop-filter: blur(24px);
-}
+  nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 48px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(8,8,16,0.85);
+    backdrop-filter: blur(24px);
+  }
 
-.logo {
-font-family: ‘Syne’, sans-serif;
-font-size: 1.65rem;
-font-weight: 800;
-background: linear-gradient(135deg, var(–accent), var(–accent2));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-letter-spacing: -1px;
-}
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.65rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+  }
 
-.nav-badge {
-background: linear-gradient(135deg, var(–accent), var(–accent2));
-color: white;
-font-size: 0.68rem;
-font-weight: 700;
-padding: 5px 12px;
-border-radius: 20px;
-letter-spacing: 1.5px;
-text-transform: uppercase;
-}
+  .nav-badge {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
 
-/* HERO */
-.hero {
-position: relative;
-z-index: 5;
-text-align: center;
-padding: 80px 48px 56px;
-max-width: 820px;
-margin: 0 auto;
-}
+  .hero {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 80px 48px 56px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
 
-.hero-tag {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 50px;
-padding: 7px 18px;
-font-size: 0.78rem;
-color: var(–accent2);
-font-weight: 500;
-margin-bottom: 30px;
-letter-spacing: 0.3px;
-}
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 7px 18px;
+    font-size: 0.78rem;
+    color: var(--accent2);
+    font-weight: 500;
+    margin-bottom: 30px;
+    letter-spacing: 0.3px;
+  }
 
-.hero-tag::before {
-content: ‘’;
-width: 7px;
-height: 7px;
-background: var(–accent2);
-border-radius: 50%;
-animation: pulse 2s infinite;
-}
+  .hero-tag::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    background: var(--accent2);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
 
-@keyframes pulse {
-0%,100% { opacity:1; transform:scale(1); }
-50% { opacity:0.4; transform:scale(1.6); }
-}
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.4; transform:scale(1.6); }
+  }
 
-h1 {
-font-family: ‘Syne’, sans-serif;
-font-size: clamp(2.6rem, 5.5vw, 4.2rem);
-font-weight: 800;
-line-height: 1.08;
-letter-spacing: -2.5px;
-margin-bottom: 22px;
-}
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -2.5px;
+    margin-bottom: 22px;
+  }
 
-h1 .highlight {
-background: linear-gradient(135deg, var(–accent), var(–accent2));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-}
+  h1 .highlight {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-.hero p {
-font-size: 1.08rem;
-color: var(–text-muted);
-line-height: 1.75;
-max-width: 540px;
-margin: 0 auto;
-font-weight: 300;
-}
+  .hero p {
+    font-size: 1.08rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    max-width: 540px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
 
-/* APP */
-.app-container {
-position: relative;
-z-index: 5;
-max-width: 920px;
-margin: 0 auto;
-padding: 0 24px 80px;
-}
+  .app-container {
+    position: relative;
+    z-index: 5;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
 
-/* STATS */
-.stats-bar {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 1px;
-background: var(–border);
-border: 1px solid var(–border);
-border-radius: 18px;
-overflow: hidden;
-margin-bottom: 32px;
-}
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
 
-.stat {
-background: var(–surface);
-padding: 22px;
-text-align: center;
-}
+  .stat {
+    background: var(--surface);
+    padding: 22px;
+    text-align: center;
+  }
 
-.stat-number {
-font-family: ‘Syne’, sans-serif;
-font-size: 1.9rem;
-font-weight: 800;
-background: linear-gradient(135deg, var(–accent), var(–accent2));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-}
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-.stat-label {
-font-size: 0.74rem;
-color: var(–text-muted);
-margin-top: 5px;
-}
+  .stat-label { font-size: 0.74rem; color: var(--text-muted); margin-top: 5px; }
 
-/* CARD */
-.app-card {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 26px;
-overflow: hidden;
-box-shadow: 0 40px 90px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,109,250,0.08);
-}
+  .app-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 40px 90px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,109,250,0.08);
+  }
 
-.app-header {
-background: var(–surface2);
-padding: 18px 28px;
-border-bottom: 1px solid var(–border);
-display: flex;
-align-items: center;
-gap: 10px;
-}
+  .app-header {
+    background: var(--surface2);
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-.dot { width: 12px; height: 12px; border-radius: 50%; }
-.dot.r { background: #ff5f57; }
-.dot.y { background: #febc2e; }
-.dot.g { background: #28c840; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #febc2e; }
+  .dot.g { background: #28c840; }
 
-.app-title {
-margin-left: 8px;
-font-size: 0.82rem;
-color: var(–text-muted);
-font-weight: 500;
-}
+  .app-title { margin-left: 8px; font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
 
-.app-body { padding: 32px; display: grid; gap: 22px; }
+  .app-body { padding: 32px; display: grid; gap: 22px; }
 
-/* FORM */
-.form-row {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 16px;
-}
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-.form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
 
-label {
-font-size: 0.75rem;
-font-weight: 700;
-color: var(–text-muted);
-text-transform: uppercase;
-letter-spacing: 1.2px;
-}
+  label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
 
-select, input, textarea {
-background: var(–bg);
-border: 1px solid var(–border);
-border-radius: 12px;
-color: var(–text);
-font-family: ‘DM Sans’, sans-serif;
-font-size: 0.95rem;
-padding: 13px 16px;
-outline: none;
-transition: all 0.2s;
-width: 100%;
-}
+  select, input, textarea {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 13px 16px;
+    outline: none;
+    transition: all 0.2s;
+    width: 100%;
+  }
 
-select:focus, input:focus, textarea:focus {
-border-color: var(–accent);
-box-shadow: 0 0 0 3px var(–glow);
-}
+  select:focus, input:focus, textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--glow);
+  }
 
-select option { background: var(–surface2); color: var(–text); }
+  select option { background: var(--surface2); color: var(--text); }
 
-textarea { resize: vertical; min-height: 145px; line-height: 1.65; }
+  textarea { resize: vertical; min-height: 145px; line-height: 1.65; }
 
-.char-count { font-size: 0.73rem; color: var(–text-dim); text-align: right; }
+  .char-count { font-size: 0.73rem; color: var(--text-dim); text-align: right; }
 
-/* TONE */
-.tone-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 10px;
-}
+  .tone-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
-.tone-btn {
-background: var(–bg);
-border: 1px solid var(–border);
-border-radius: 10px;
-padding: 10px 12px;
-color: var(–text-muted);
-font-family: ‘DM Sans’, sans-serif;
-font-size: 0.82rem;
-font-weight: 500;
-cursor: pointer;
-transition: all 0.2s;
-text-align: center;
-}
+  .tone-btn {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: var(--text-muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
 
-.tone-btn:hover { border-color: var(–accent); color: var(–text); }
-.tone-btn.active { background: var(–glow); border-color: var(–accent); color: var(–accent); }
+  .tone-btn:hover { border-color: var(--accent); color: var(--text); }
+  .tone-btn.active { background: var(--glow); border-color: var(--accent); color: var(--accent); }
 
-/* BUTTON */
-.generate-btn {
-width: 100%;
-padding: 18px;
-background: linear-gradient(135deg, var(–accent), #a855f7);
-border: none;
-border-radius: 14px;
-color: white;
-font-family: ‘Syne’, sans-serif;
-font-size: 1.08rem;
-font-weight: 700;
-cursor: pointer;
-transition: all 0.3s;
-letter-spacing: 0.3px;
-position: relative;
-overflow: hidden;
-}
+  .generate-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--accent), #a855f7);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
 
-.generate-btn::before {
-content: ‘’;
-position: absolute;
-inset: 0;
-background: linear-gradient(135deg, #a855f7, var(–accent2));
-opacity: 0;
-transition: opacity 0.3s;
-}
+  .generate-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #a855f7, var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
 
-.generate-btn:hover::before { opacity: 1; }
-.generate-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 45px rgba(124,109,250,0.45); }
-.generate-btn:active { transform: translateY(0); }
-.generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-.generate-btn span { position: relative; z-index: 1; }
+  .generate-btn:hover::before { opacity: 1; }
+  .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 45px rgba(124,109,250,0.45); }
+  .generate-btn:active { transform: translateY(0); }
+  .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .generate-btn span { position: relative; z-index: 1; }
 
-/* DIVIDER */
-.divider {
-display: flex; align-items: center; gap: 16px;
-color: var(–text-dim); font-size: 0.78rem;
-}
-.divider::before, .divider::after {
-content: ‘’; flex: 1; height: 1px; background: var(–border);
-}
+  .divider {
+    display: flex; align-items: center; gap: 16px;
+    color: var(--text-dim); font-size: 0.78rem;
+  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-/* OUTPUT */
-.output-section { display: none; }
-.output-section.visible {
-display: block;
-animation: slideUp 0.4s ease;
-}
+  .output-section { display: none; }
+  .output-section.visible { display: block; animation: slideUp 0.4s ease; }
 
-@keyframes slideUp {
-from { opacity:0; transform:translateY(20px); }
-to { opacity:1; transform:translateY(0); }
-}
+  @keyframes slideUp {
+    from { opacity:0; transform:translateY(20px); }
+    to { opacity:1; transform:translateY(0); }
+  }
 
-.output-header {
-display: flex; justify-content: space-between;
-align-items: center; margin-bottom: 16px;
-}
+  .output-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
 
-.output-label {
-font-size: 0.78rem; font-weight: 700;
-color: var(–accent2); text-transform: uppercase;
-letter-spacing: 1px; display: flex; align-items: center; gap: 8px;
-}
+  .output-label {
+    font-size: 0.78rem; font-weight: 700;
+    color: var(--accent2); text-transform: uppercase;
+    letter-spacing: 1px; display: flex; align-items: center; gap: 8px;
+  }
 
-.output-label::before {
-content: ‘’; width: 7px; height: 7px;
-background: var(–accent2); border-radius: 50%;
-}
+  .output-label::before { content: ''; width: 7px; height: 7px; background: var(--accent2); border-radius: 50%; }
 
-.output-actions { display: flex; gap: 8px; }
+  .output-actions { display: flex; gap: 8px; }
 
-.action-btn {
-background: var(–surface2);
-border: 1px solid var(–border);
-border-radius: 8px;
-color: var(–text-muted);
-font-family: ‘DM Sans’, sans-serif;
-font-size: 0.8rem;
-padding: 8px 14px;
-cursor: pointer;
-transition: all 0.2s;
-font-weight: 500;
-}
+  .action-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
 
-.action-btn:hover { border-color: var(–accent); color: var(–accent); }
+  .action-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-.output-box {
-background: var(–bg);
-border: 1px solid var(–border);
-border-radius: 14px;
-padding: 26px;
-font-size: 0.9rem;
-line-height: 1.85;
-color: var(–text);
-min-height: 220px;
-white-space: pre-wrap;
-font-family: ‘DM Sans’, sans-serif;
-}
+  .output-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: var(--text);
+    min-height: 220px;
+    white-space: pre-wrap;
+    font-family: 'DM Sans', sans-serif;
+  }
 
-/* LOADING */
-.loading-state { display: none; text-align: center; padding: 44px; color: var(–text-muted); }
-.loading-state.visible { display: block; }
+  .loading-state { display: none; text-align: center; padding: 44px; color: var(--text-muted); }
+  .loading-state.visible { display: block; }
 
-.loader {
-width: 42px; height: 42px;
-border: 3px solid var(–border);
-border-top-color: var(–accent);
-border-radius: 50%;
-animation: spin 0.75s linear infinite;
-margin: 0 auto 18px;
-}
+  .loader {
+    width: 42px; height: 42px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+    margin: 0 auto 18px;
+  }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-.loading-steps { display: flex; flex-direction: column; gap: 7px; margin-top: 14px; }
+  .loading-steps { display: flex; flex-direction: column; gap: 7px; margin-top: 14px; }
 
-.loading-step {
-font-size: 0.8rem; color: var(–text-dim);
-opacity: 0; animation: fadeIn 0.5s forwards;
-}
+  .loading-step {
+    font-size: 0.8rem; color: var(--text-dim);
+    opacity: 0; animation: fadeIn 0.5s forwards;
+  }
 
-@keyframes fadeIn { to { opacity: 1; } }
+  @keyframes fadeIn { to { opacity: 1; } }
 
-/* ERROR */
-.error-msg {
-background: rgba(255,100,100,0.1);
-border: 1px solid rgba(255,100,100,0.3);
-border-radius: 10px; padding: 12px 16px;
-color: #ff7070; font-size: 0.85rem; display: none;
-}
-.error-msg.visible { display: block; }
+  .error-msg {
+    background: rgba(255,100,100,0.1);
+    border: 1px solid rgba(255,100,100,0.3);
+    border-radius: 10px; padding: 12px 16px;
+    color: #ff7070; font-size: 0.85rem; display: none;
+  }
+  .error-msg.visible { display: block; }
 
-/* FOOTER */
-footer {
-position: relative; z-index: 5;
-text-align: center; padding: 30px;
-border-top: 1px solid var(–border);
-color: var(–text-dim); font-size: 0.8rem;
-}
+  footer {
+    position: relative; z-index: 5;
+    text-align: center; padding: 30px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim); font-size: 0.8rem;
+  }
 
-footer span {
-background: linear-gradient(135deg, var(–accent), var(–accent2));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-font-weight: 700;
-}
+  footer span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
 
-@media (max-width: 640px) {
-nav { padding: 16px 20px; }
-.hero { padding: 48px 20px 36px; }
-.app-body { padding: 20px; }
-.form-row { grid-template-columns: 1fr; }
-.tone-grid { grid-template-columns: repeat(2, 1fr); }
-.stats-bar { grid-template-columns: 1fr; }
-.output-header { flex-direction: column; gap: 12px; align-items: flex-start; }
-}
+  @media (max-width: 640px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 48px 20px 36px; }
+    .app-body { padding: 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    .tone-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-bar { grid-template-columns: 1fr; }
+    .output-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
 </style>
-
 </head>
 <body>
 
@@ -496,99 +451,96 @@ nav { padding: 16px 20px; }
       <div class="app-title">ReportMind — Report Generator</div>
     </div>
 
-```
-<div class="app-body">
+    <div class="app-body">
 
-  <div class="form-row">
-    <div class="form-group">
-      <label>Academic Field</label>
-      <select id="field">
-        <option value="mechanical engineering">⚙️ Mechanical Engineering</option>
-        <option value="electrical engineering">⚡ Electrical Engineering</option>
-        <option value="civil engineering">🏗️ Civil Engineering</option>
-        <option value="computer science">💻 Computer Science</option>
-        <option value="chemistry">🧪 Chemistry</option>
-        <option value="biology">🧬 Biology</option>
-        <option value="physics">🔬 Physics</option>
-        <option value="medicine">🩺 Medicine</option>
-        <option value="law">⚖️ Law</option>
-        <option value="business">📊 Business</option>
-        <option value="environmental science">🌱 Environmental Science</option>
-        <option value="mathematics">📐 Mathematics</option>
-      </select>
-    </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Academic Field</label>
+          <select id="field">
+            <option value="mechanical engineering">⚙️ Mechanical Engineering</option>
+            <option value="electrical engineering">⚡ Electrical Engineering</option>
+            <option value="civil engineering">🏗️ Civil Engineering</option>
+            <option value="computer science">💻 Computer Science</option>
+            <option value="chemistry">🧪 Chemistry</option>
+            <option value="biology">🧬 Biology</option>
+            <option value="physics">🔬 Physics</option>
+            <option value="medicine">🩺 Medicine</option>
+            <option value="law">⚖️ Law</option>
+            <option value="business">📊 Business</option>
+            <option value="environmental science">🌱 Environmental Science</option>
+            <option value="mathematics">📐 Mathematics</option>
+          </select>
+        </div>
 
-    <div class="form-group">
-      <label>Report Type</label>
-      <select id="reportType">
-        <option value="lab report">Lab Report</option>
-        <option value="research report">Research Report</option>
-        <option value="case study">Case Study</option>
-        <option value="project report">Project Report</option>
-        <option value="technical report">Technical Report</option>
-        <option value="literature review">Literature Review</option>
-        <option value="field report">Field Report</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label>Report Title / Topic</label>
-    <input type="text" id="title" placeholder="e.g. Analysis of Beam Deflection Under Load" />
-  </div>
-
-  <div class="form-group">
-    <label>Your Notes, Data & Key Points</label>
-    <textarea id="notes" placeholder="Paste your raw notes, experiment data, bullet points, observations, results — anything you have. The more detail you give, the better your report will be.&#10;&#10;Example:&#10;- Tested 3 beam samples under 50N, 100N, 150N loads&#10;- Results: deflection increased linearly&#10;- Used steel beams 500mm length"></textarea>
-    <div class="char-count" id="charCount">0 characters</div>
-  </div>
-
-  <div class="form-group">
-    <label>Writing Tone</label>
-    <div class="tone-grid">
-      <button class="tone-btn active" onclick="selectTone(this, 'formal academic')">🎓 Formal Academic</button>
-      <button class="tone-btn" onclick="selectTone(this, 'technical and precise')">🔧 Technical</button>
-      <button class="tone-btn" onclick="selectTone(this, 'clear and concise')">✨ Clear & Concise</button>
-      <button class="tone-btn" onclick="selectTone(this, 'analytical and critical')">🧠 Analytical</button>
-      <button class="tone-btn" onclick="selectTone(this, 'descriptive and detailed')">📝 Detailed</button>
-      <button class="tone-btn" onclick="selectTone(this, 'professional')">💼 Professional</button>
-    </div>
-  </div>
-
-  <div class="error-msg" id="errorMsg"></div>
-
-  <button class="generate-btn" id="generateBtn" onclick="generateReport()">
-    <span>✦ Generate My Report</span>
-  </button>
-
-  <div class="loading-state" id="loadingState">
-    <div class="loader"></div>
-    <div style="font-weight:600; color:var(--text)">ReportMind is writing your report...</div>
-    <div class="loading-steps">
-      <div class="loading-step" style="animation-delay:0.5s">📋 Analyzing your notes and data...</div>
-      <div class="loading-step" style="animation-delay:1.5s">🧠 Structuring sections and arguments...</div>
-      <div class="loading-step" style="animation-delay:2.5s">✍️ Writing introduction, methodology & results...</div>
-      <div class="loading-step" style="animation-delay:3.5s">📊 Finalizing conclusions & formatting...</div>
-    </div>
-  </div>
-
-  <div class="output-section" id="outputSection">
-    <div class="divider">Report Ready</div>
-    <br>
-    <div class="output-header">
-      <div class="output-label">Generated Report</div>
-      <div class="output-actions">
-        <button class="action-btn" onclick="copyReport()">📋 Copy</button>
-        <button class="action-btn" onclick="downloadReport()">⬇️ Download</button>
-        <button class="action-btn" onclick="resetForm()">↩️ New Report</button>
+        <div class="form-group">
+          <label>Report Type</label>
+          <select id="reportType">
+            <option value="lab report">Lab Report</option>
+            <option value="research report">Research Report</option>
+            <option value="case study">Case Study</option>
+            <option value="project report">Project Report</option>
+            <option value="technical report">Technical Report</option>
+            <option value="literature review">Literature Review</option>
+            <option value="field report">Field Report</option>
+          </select>
+        </div>
       </div>
+
+      <div class="form-group">
+        <label>Report Title / Topic</label>
+        <input type="text" id="title" placeholder="e.g. Analysis of Beam Deflection Under Load" />
+      </div>
+
+      <div class="form-group">
+        <label>Your Notes, Data & Key Points</label>
+        <textarea id="notes" placeholder="Paste your raw notes, experiment data, bullet points, observations, results — anything you have. The more detail you give, the better your report will be.&#10;&#10;Example:&#10;- Tested 3 beam samples under 50N, 100N, 150N loads&#10;- Results: deflection increased linearly&#10;- Used steel beams 500mm length"></textarea>
+        <div class="char-count" id="charCount">0 characters</div>
+      </div>
+
+      <div class="form-group">
+        <label>Writing Tone</label>
+        <div class="tone-grid">
+          <button class="tone-btn active" onclick="selectTone(this, 'formal academic')">🎓 Formal Academic</button>
+          <button class="tone-btn" onclick="selectTone(this, 'technical and precise')">🔧 Technical</button>
+          <button class="tone-btn" onclick="selectTone(this, 'clear and concise')">✨ Clear & Concise</button>
+          <button class="tone-btn" onclick="selectTone(this, 'analytical and critical')">🧠 Analytical</button>
+          <button class="tone-btn" onclick="selectTone(this, 'descriptive and detailed')">📝 Detailed</button>
+          <button class="tone-btn" onclick="selectTone(this, 'professional')">💼 Professional</button>
+        </div>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+
+      <button class="generate-btn" id="generateBtn" onclick="generateReport()">
+        <span>✦ Generate My Report</span>
+      </button>
+
+      <div class="loading-state" id="loadingState">
+        <div class="loader"></div>
+        <div style="font-weight:600; color:var(--text)">ReportMind is writing your report...</div>
+        <div class="loading-steps">
+          <div class="loading-step" style="animation-delay:0.5s">📋 Analyzing your notes and data...</div>
+          <div class="loading-step" style="animation-delay:1.5s">🧠 Structuring sections and arguments...</div>
+          <div class="loading-step" style="animation-delay:2.5s">✍️ Writing introduction, methodology & results...</div>
+          <div class="loading-step" style="animation-delay:3.5s">📊 Finalizing conclusions & formatting...</div>
+        </div>
+      </div>
+
+      <div class="output-section" id="outputSection">
+        <div class="divider">Report Ready</div>
+        <br>
+        <div class="output-header">
+          <div class="output-label">Generated Report</div>
+          <div class="output-actions">
+            <button class="action-btn" onclick="copyReport()">📋 Copy</button>
+            <button class="action-btn" onclick="downloadReport()">⬇️ Download</button>
+            <button class="action-btn" onclick="resetForm()">↩️ New Report</button>
+          </div>
+        </div>
+        <div class="output-box" id="outputBox"></div>
+      </div>
+
     </div>
-    <div class="output-box" id="outputBox"></div>
-  </div>
-
-</div>
-```
-
   </div>
 </div>
 
@@ -597,6 +549,9 @@ nav { padding: 16px 20px; }
 </footer>
 
 <script>
+  // ⚠️ REPLACE THIS WITH YOUR ACTUAL API KEY
+  const API_KEY = "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";
+
   let selectedTone = 'formal academic';
 
   function selectTone(btn, tone) {
@@ -623,7 +578,7 @@ nav { padding: 16px 20px; }
     const notes = document.getElementById('notes').value.trim();
 
     if (!title) return showError('Please enter a report title or topic.');
-    if (!notes || notes.length < 20) return showError('Please add more detail to your notes — the more you give, the better the report.');
+    if (!notes || notes.length < 20) return showError('Please add more detail to your notes.');
 
     const btn = document.getElementById('generateBtn');
     const loading = document.getElementById('loadingState');
@@ -643,29 +598,32 @@ ${notes}
 
 WRITING TONE: ${selectedTone}
 
-Write a FULL, COMPLETE ${reportType} with ALL of the following sections (use clear section headers):
+Write a FULL, COMPLETE ${reportType} with ALL of the following sections:
 
 1. TITLE PAGE INFO (title, field, date)
-2. ABSTRACT (150-200 words summarizing the whole report)
-3. INTRODUCTION (background, context, objectives, purpose)
-4. METHODOLOGY / MATERIALS & METHODS (how the work was done, what was used)
-5. RESULTS & FINDINGS (present the data and findings clearly)
-6. DISCUSSION (interpret the results, what they mean, compare to theory if relevant)
-7. CONCLUSION (summarize findings, limitations, future work)
-8. REFERENCES (list 4-6 realistic academic references in proper format)
+2. ABSTRACT (150-200 words)
+3. INTRODUCTION (background, context, objectives)
+4. METHODOLOGY (how the work was done)
+5. RESULTS & FINDINGS (present data clearly)
+6. DISCUSSION (interpret the results)
+7. CONCLUSION (summarize findings, limitations)
+8. REFERENCES (4-6 realistic academic references)
 
-Rules:
-- Write in ${selectedTone} tone throughout
-- Use proper academic language appropriate for ${field}
-- Be thorough and detailed — this should be a complete report a student can submit
-- Use the student's notes as the core content, expanding on them professionally
-- Format clearly with section headers`;
+Use proper academic language appropriate for ${field}. Write in ${selectedTone} tone.`;
 
     try {
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: prompt })
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': API_KEY,
+          'anthropic-version': '2023-06-01'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          messages: [{ role: 'user', content: prompt }]
+        })
       });
 
       const data = await response.json();
@@ -674,12 +632,10 @@ Rules:
         document.getElementById('outputBox').textContent = data.content[0].text;
         outputSection.classList.add('visible');
       } else {
-        showError('Something went wrong. Please try again.');
-        console.log(data);
+        showError('Something went wrong: ' + JSON.stringify(data));
       }
     } catch (err) {
-      showError('Connection error. Please check your internet and try again.');
-      console.log(err);
+      showError('Error: ' + err.message);
     } finally {
       btn.disabled = false;
       btn.querySelector('span').textContent = '✦ Generate My Report';
@@ -717,6 +673,5 @@ Rules:
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
-
 </body>
 </html>
