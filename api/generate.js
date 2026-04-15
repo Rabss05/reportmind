@@ -1,35 +1,39 @@
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  
-  if (!apiKey) {
-    return res.status(200).json({ error: 'NO API KEY FOUND', env: Object.keys(process.env) });
-  }
-
   try {
-    const { prompt } = req.body;
+    let body = req.body;
+    
+    // Parse body if it's a string
+    if (typeof body === 'string') {
+      body = JSON.parse(body);
+    }
+    
+    const prompt = body && body.prompt;
+    if (!prompt) return res.status(400).json({ error: 'No prompt provided' });
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': apiKey,
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt || 'Say hello' }]
+        messages: [{ role: 'user', content: prompt }]
       })
     });
 
-    const text = await response.text();
-    return res.status(200).json({ raw: text, status: response.status });
+    const data = await response.json();
+    return res.status(200).json(data);
 
   } catch (err) {
-    return res.status(200).json({ error: err.message, stack: err.stack });
+    return res.status(500).json({ error: err.message });
   }
 };
